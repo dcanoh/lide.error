@@ -1,0 +1,6 @@
+[lide.error]
+author    = Hernan Dario Cano
+date      = 2017/03/19
+version   = 0.0.01
+windows   = x86:lua/lide/error/init.lua
+mantainer = lide team
