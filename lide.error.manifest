@@ -2,5 +2,6 @@
 author    = Hernan Dario Cano
 date      = 2017/03/19
 version   = 0.0.01
+linux     = x86:lua/lide/error/init.lua|x64:lua/lide/error/init.lua
 windows   = x86:lua/lide/error/init.lua
 mantainer = lide team
