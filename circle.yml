@@ -2,8 +2,9 @@ dependencies:
   pre:
     - sudo apt-get install lua5.1 luarocks
     - sudo luarocks install https://raw.githubusercontent.com/lidesdk/framework/master/lide-0.0-0.rockspec
+    - sudo luarocks install luafilesystem
     - ls /usr/local/share/lua
-    - export LIDE_PATH="/usr/local/share/lua/lide"
+    - export LIDE_FRAMEWORK="/usr/local/share/lua/lide"
 
 test:
   override:

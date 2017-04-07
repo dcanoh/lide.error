@@ -6,12 +6,14 @@ lide.error
  author : Hernan Dario Cano
  version: 0.0.01
 
-================  ============  ==============  =========
-  platform          arch          version        build
-================  ============  ==============  =========
-  ``GNU/Linux``    ``x64``       ``0.0.01``      .. image:: https://circleci.com/gh/dcanoh/lide.error.svg?style=svg
-  ``Windows``      ``x86``       ``0.0.01``     
-================  ============  ==============  =========
+
+================  =================  ==============  =========
+  platform          arch               version        build
+================  =================  ==============  =========
+  ``GNU/Linux``    ``x64``             ``0.0.01``      .. image:: https://circleci.com/gh/dcanoh/lide.error.svg?style=svg
+  ``Windows``      ``x86`` ``x86``     ``0.0.01``      .. image:: https://ci.appveyor.com/api/projects/status/1902m5k8094gp7vy/branch/master  
+                                                        :target: https://ci.appveyor.com/project/dcanoh/lide-error
+================  =================  ==============  =========
 
 **Caracteristicas:**
 
