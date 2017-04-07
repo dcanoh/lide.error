@@ -1,18 +1,10 @@
 dependencies:
-  cache_directories:
-    #- spec/tmp
   pre:
-    - sudo apt-get install lua5.1 
-    # rocks luajit
-    # Force busted to run the tests under luajit, since we require LuaJIT for
-    # the FFI features.
-   # - sudo update-alternatives --install /usr/bin/lua lua-interpreter /usr/bin/luajit* 200
-   # - sudo luarocks install busted
-  #override:
-    #- make
+    - sudo apt-get install lua5.1 luarocks
+    - sudo luarocks install https://raw.githubusercontent.com/lidesdk/framework/master/lide-0.0-0.rockspec
+    - ls /usr/local/share/lua
+    - export LIDE_PATH="/usr/local/share/lua/lide"
+
 test:
   override:
-    lua5.1 -e "print(33)"
-    lua51 -e "print(33"
-    lua -e "print(33)"
-    #- make test
+    - lua5.1 tests/init_tests.lua
