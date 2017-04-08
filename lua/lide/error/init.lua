@@ -40,8 +40,8 @@ end
 --====================================================================--
 --== Error Base Class
 --====================================================================--
-
-local Error = class 'Error' : subclassof 'Object' : global ( false )
+--local Object = lide.classes.object
+local Error = class 'Error' --: subclassof 'Object' : global ( false )
 
 local DEFAULT_ERROR_NAME = Error:name()
 
@@ -151,7 +151,7 @@ lperr = function ( sErrMsg, nlevel )
 end
 
 
-Exception = class 'Exception' : subclassof 'Object' : global ( false )
+Exception = class 'Exception' --: subclassof 'Object' : global ( false )
 
 function Exception:Exception ( sExceptionName )
    public {
