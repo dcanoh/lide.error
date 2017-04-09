@@ -7,13 +7,13 @@ lide.error
  version: 0.0.01
 
 
-================  =================  =========
-  platform          arch              build
-================  =================  =========
-  ``GNU/Linux``    ``x64``             .. image:: https://circleci.com/gh/dcanoh/lide.error.svg?style=svg
-  ``Windows``      ``x86`` ``x86``     .. image:: https://ci.appveyor.com/api/projects/status/1902m5k8094gp7vy/branch/master  
-                                        :target: https://ci.appveyor.com/project/dcanoh/lide-error
-================  =================  =========
+================  =================  ===================================================  ================
+  platform          arch               buil log                                            build status
+================  =================  ===================================================  ================
+  ``GNU/Linux``    ``x64``            http://circleci.com/gh/dcanoh/lide.error              .. image:: https://circleci.com/gh/dcanoh/lide.error.svg?style=svg
+  ``Windows``      ``x86`` ``x86``    http://ci.appveyor.com/project/dcanoh/lide-error      .. image:: https://ci.appveyor.com/api/projects/status/1902m5k8094gp7vy/branch/master  
+                                                                                              :target: https://ci.appveyor.com/project/dcanoh/lide-error
+================  =================  ===================================================  ================
 
 **Caracteristicas:**
 
