@@ -1,4 +1,4 @@
-version: 0.0.1.{build}-test
+version: 0.0.{build}
 
 # Use default image unless needed
 #os:
