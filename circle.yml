@@ -10,5 +10,4 @@ dependencies:
 test:
   override:
     # executing tests:
-    - export LIDE_PATH="/usr/local/share/lua/5.1/lide"
-    - lua5.1 tests/init_tests.lua
+    - export LIDE_PATH="/usr/local/share/lua/5.1/lide" && lua5.1 tests/init_tests.lua
