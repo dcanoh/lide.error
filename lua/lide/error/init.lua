@@ -45,6 +45,7 @@ end
 local Object = lide.classes.object
 
 local Exception = class 'Exception' : subclassof ( Object )
+
 local DEFAULT_ERROR_NAME = Exception:name()
 
 function Exception:Exception ( sExceptionName, sDefaultErrMsg )

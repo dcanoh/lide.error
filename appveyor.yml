@@ -26,7 +26,7 @@ install:
 - call .appveyor\install.bat
 
 build_script:
-  - luarocks install https://raw.githubusercontent.com/lidesdk/framework/master/lide-0.0-0.rockspec
+  - luarocks install https://raw.githubusercontent.com/lidesdk/framework/master/lide-0.0-1.rockspec
   - luarocks install luafilesystem
 
 test_script:

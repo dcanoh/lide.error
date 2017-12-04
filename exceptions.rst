@@ -30,7 +30,7 @@ error.newException
 Crear una nueva excepción.
 
 ============  ========================================================================================
- Exception_     error.newException ( string_ ExceptionName )
+ Exception_     error.newException ( string_ ExceptionName, string_ DefaultErrorMessage )
 ============  ========================================================================================
 
 
