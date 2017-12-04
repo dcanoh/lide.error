@@ -1,12 +1,12 @@
-assert( class or lide.class, "liderror: requires lide.class" )
+assert( class or lide.class, "lide.error: requires lide.class" )
 
 local ltrace = require 'lide.error.ltrace'
 
 --====================================================================--
 --== Setup, Constants
 
-local DEFAULT_PREFIX     = "ERROR: "
-local DEFAULT_MESSAGE    = "LuaException"
+local DEFAULT_PREFIX     = 'ERROR: '
+local DEFAULT_ERRMSG     = 'LuaException'
 local DEFAULT_STACKLEVEL = 3
 local REM_NUM_STACKS     = 4
 
@@ -17,7 +17,7 @@ local REM_NUM_STACKS     = 4
 
 local function try( funcs )
 	local try_f, catch_f, finally_f = funcs[1], funcs[2], funcs[3]
-	assert( try_f, "lua-error: missing function for try()" )
+	assert( try_f, 'lua-error: missing function for try()' )
 	
 	REM_NUM_STACKS = 6
 	
@@ -39,20 +39,24 @@ local function finally(f)
 end
 
 --====================================================================--
---== Error Base Class
+--== Class Exception
 --====================================================================--
 
-local Error = class 'Error' : subclassof ( Object )
+local Object = lide.classes.object
 
-local DEFAULT_ERROR_NAME = Error:name()
+local Exception = class 'Exception' : subclassof ( Object )
+local DEFAULT_ERROR_NAME = Exception:name()
 
-Exception = class 'Exception' : subclassof ( Object )
+function Exception:Exception ( sExceptionName, sDefaultErrMsg )
+	assert(type(sExceptionName) == 'string', 'arg must be a string.')
+	
+	if sDefaultErrMsg then
+		assert(type(sDefaultErrMsg) == 'string', 'arg must be a string.')
+	end
 
-function Exception:Exception ( sExceptionName )
-   public {
-   	message = DEFAULT_MESSAGE,
-   	traceback = '',
-   	--prefix  = params.prefix or DEFAULT_PREFIX,
+    public {
+   		message = sDefaultErrMsg or DEFAULT_ERRMSG,
+   		traceback = '',
 	}
 
 	private {
@@ -68,8 +72,8 @@ function Exception:__call ( message, nlevel )
 	
 	local maxstack    = (#ltrace.getstack(self.nlevel) - REM_NUM_STACKS)
 	
-	self.message   = 'TypeException: ' .. (message or self.message)
-	self.traceback = self.message ..'\n\n'.. ltrace.getfulltrace(self.nlevel, maxstack)
+	self.message   = self.name .. ': ' .. (message or self.message)
+	self.traceback = self.message .. '\n\n' .. ltrace.getfulltrace(self.nlevel, maxstack);
 	
 	lide.core.lua.error (self)
 end
@@ -82,24 +86,36 @@ function Exception:isa ( ExceptionObject )
 	return self:getName() == ExceptionObject:getName()
 end
 
-function Error:Error ( message, nlevel )
+--====================================================================--
+--== Class Error
+--====================================================================--
+
+local StandardError = class 'StandardError' : subclassof ( Exception )
+
+function StandardError:StandardError ( message, nlevel )
 	
+	assert(type(message) == 'string', 'error message must be string.');
+	assert(type(nlevel) == 'number', 'stack level must be number.');
+
 	public { 
-		message = message or DEFAULT_MESSAGE,
-		nlevel  = nlevel or DEFAULT_STACKLEVEL
+		message = message or DEFAULT_ERRMSG,
+		nlevel  = nlevel  or DEFAULT_STACKLEVEL
 	}
 	
-	self . super :init 'LideException'
+	self . super :init ('LuaException', message)
 	
 	lide.core.lua.error(self.message, self.nlevel)
 end
 
-function Error:__tostring( ... )
+function StandardError:__tostring( ... )
 	return table.concat( { self.message, "\n", self.traceback } )
 end
 
-local TypeException = Exception :new 'TypeException'
+--====================================================================--
+--== Create Default framework Exceptions
+--====================================================================--
 
+local TypeError = Exception :new 'TypeError'
 
 local function istype( ValueToCompare, TypeToCompare )
 	local errmsg = errmsg or ('type is incorrect, must be %s.'):format(TypeToCompare)
@@ -110,21 +126,20 @@ local function istype( ValueToCompare, TypeToCompare )
 		if not errmsg then 
 			return false ;
 		else 
-			TypeException(errmsg, DEFAULT_STACKLEVEL +1);
+			TypeError(errmsg, DEFAULT_STACKLEVEL +1);
 		end 
 	end
 end
 
-Error : enum { 
-	newException = function ( sExceptionName )
-   	local newException = Exception :new ( sExceptionName )
-
-   	return newException
-	end ,
+StandardError : enum { 
 
 	DEFAULT_STACKLEVEL = DEFAULT_STACKLEVEL,
 
-	TypeException = TypeException,
+	TypeError = TypeError,
+
+	newException = function ( sExceptionName )
+   		return Exception :new ( sExceptionName );
+	end ,
 
 	is_number = function ( value, errmsg )
 		return istype(value, 'number');
@@ -155,13 +170,12 @@ Error : enum {
 --== Error API Setup
 --====================================================================--
 
--- globals
 _G.try = try
 _G.catch = catch
 _G.finally = finally
 
-getmetatable(Error).__tostring = function ( ... )
+getmetatable(StandardError).__tostring = function ( ... )
 	return '[lide.error] namespace' 
 end
 
-return Error
+return StandardError
