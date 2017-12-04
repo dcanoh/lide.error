@@ -30,5 +30,5 @@ build_script:
   - luarocks install luafilesystem
 
 test_script:
-- set LIDE_FRAMEWORK="C:\lua\x86\5.1.5\LuaRocks\systree\share\lua\5.1\lide"
+- set LIDE_PATH="C:\lua\x86\5.1.5\LuaRocks\systree\share\lua\5.1\lide"
 - lua tests\lide_error_tests.lua
