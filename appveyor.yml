@@ -1,43 +1,10 @@
 version: 0.0.{build}
 
-# Use default image unless needed
-#os:
-#- Windows Server 2012 R2
-
 shallow_clone: true
 
 environment:
   LUAROCKS_VER: 2.4.1
-#  matrix:
   LUA_VER: 5.1.5
-##  - LUA_VER: 5.1.5
-##  - LUA_VER: 5.2.4  # Lua 5.2.4 with compatibility flags enabled (DLUA_COMPAT_ALL).
-##  - LUA_VER: 5.2.4  # Lua 5.2.4 with compatibility flags disabled.
-##    NOCOMPAT: true
-##  - LUA_VER: 5.3.2  # Lua 5.3.2 with compatibility flags enabled (DLUA_COMPAT_5_2).
-##  - LUA_VER: 5.3.2  # Lua 5.3.2 with compatibility flags disabled.
-##    NOCOMPAT: true
-##  - LJ_VER: 2.0.4
-##  - LJ_VER: 2.1
-##  
-matrix:
-  allow_failures:
-    - configuration: 2010
-      platform: x64
-    - configuration: 2008
-      platform: x64
-    - configuration: MinGW
-      platform: x64
-
-# Abuse this section so we can have a matrix with different Compiler versions
-# Is there a better way? Like injecting an array in the matrix?
-#configuration:
-#  - 2015
-#  - 2013
-#  - 2012
-#  - MinGW
-#  - 2010 # only works for x86
-#  - 2008 # only works for x86
 
 platform:
   - x86
@@ -58,14 +25,10 @@ install:
 # Setup Lua development/build environment
 - call .appveyor\install.bat
 
-#before_build:
-## @todo
-#- echo "Installing external deps"
-
 build_script:
   - luarocks install https://raw.githubusercontent.com/lidesdk/framework/master/lide-0.0-0.rockspec
   - luarocks install luafilesystem
 
 test_script:
 - set LIDE_FRAMEWORK="C:\lua\x86\5.1.5\LuaRocks\systree\share\lua\5.1\lide"
-- lua tests\init_tests.lua
+- lua tests\lide_error_tests.lua
