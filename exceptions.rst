@@ -13,16 +13,17 @@ cual encontraremos la api de manejo de errores, también se registran las palabr
 
  error = require 'liderror'
 
-====================  ===========  ===============================================================================
+====================  ============  ===============================================================================
   Field                 Type         Descripción
-====================  ===========  ===============================================================================
- error.newException    function_    Crear una nueva excepcion
- error.try             function_    Dentro de ésta función pondremos la pieza de código que podría tener error.
- error.catch           function_    ``Opcional`` Dentro de esta función pondremos el código que se ejecutará en caso de error.
- error.finally         function_    ``Opcional`` Aquí deberíamos poner código de limpieza
- error.Exception       class_       Clase Exception, padre de todas las excepciones.
- error.Error           class_       Clase Error, componente base.
-====================  ===========  ===============================================================================
+====================  ============  ===============================================================================
+ error.newException    function_     Crear una nueva excepcion
+ error.try             function_     Dentro de ésta función pondremos la pieza de código que podría tener error.
+ error.catch           function_     ``Opcional`` Dentro de esta función pondremos el código que se ejecutará en caso de error.
+ error.finally         function_     ``Opcional`` Aquí deberíamos poner código de limpieza
+ error.Exception       class_        Clase Exception, padre de todas las excepciones.
+ error.Error           class_        Clase Error, componente base.
+ error.TypeError       Exception_    Representa un error con un tipo de valor erroneo.
+====================  ============  ===============================================================================
 
 error.newException
 ^^^^^^^^^^^^^^^^^^
