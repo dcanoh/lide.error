@@ -47,7 +47,7 @@ catch {
 }
 
 assert (lide.error.newException)
-assert (lide.error.TypeException)
+assert (lide.error.TypeError)
 assert (lide.error.is_number)
 assert (lide.error.is_string)
 assert (try)
